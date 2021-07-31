@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example</groupId>
-	<artifactId>ConnectFour</artifactId>
+	<artifactId>EventManagingWebsiteInSpring</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>ConnectFour</name>
-	<description>Connect Four Game</description>
+	<name>EventManagingWebsiteInSpring</name>
+	<description>Event Managing App</description>
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>

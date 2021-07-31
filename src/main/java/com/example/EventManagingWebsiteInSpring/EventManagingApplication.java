@@ -1,13 +1,13 @@
-package com.example.ConnectFour;
+package com.example.EventManagingWebsiteInSpring;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ConnectFourApplication {
+public class EventManagingApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ConnectFourApplication.class, args);
+		SpringApplication.run(EventManagingApplication.class, args);
 	}
 
 }
