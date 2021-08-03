@@ -1,0 +1,236 @@
+body {
+    font-size: 16px;
+    background-color: #888;
+}
+
+.content {
+    float: left;
+    padding: 10px;
+    min-height: 25cm;
+    border-radius: 5px;
+}
+
+.content.sideContent {
+    width: 20%;
+    background-color: cadetblue;
+}
+
+.content.mainContent {
+    width: 75%;
+}
+
+.content.fullContent {
+    width: 100%;
+    padding: 30px;
+    text-align: center;
+    align-items: center;
+}
+
+.contentBox:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.contentBox {
+    margin-top: 10px;
+}
+
+.title {
+    color: darkblue;
+    font-size: 20px;
+}
+
+.warning {
+    color: red;
+}
+
+.displayItems dt {
+    text-decoration-line: underline;
+    color: blue;
+    font-size: 22px;
+    height: 35px;
+    border-top: 1px solid #aaaaaa;
+}
+
+.displayItems dt:hover {
+    background-color: #999;
+    cursor: pointer;
+}
+
+.displayItems dd {
+    font-size: 18px;
+    overflow-x: hidden;
+}
+
+.loadMoreContent {
+    font-size: 20px;
+    height: 30px;
+    border: 1px solid #777;
+    background-color: #666;
+    color: #111111;
+    text-align: center;
+}
+
+.loadMoreContent:hover {
+    background-color: #aaa;
+}
+
+.searchField {
+    padding-bottom: 20px;
+}
+
+.searchBar {
+    width: 100%;
+}
+
+.mainSearchBar {
+    height: 30px;
+}
+
+.clickable:hover {
+    cursor: pointer;
+}
+
+.userInputField {
+    width: 35%;
+    margin: 10px;
+    display: inline;
+}
+
+.submitButton {
+    height: 30px;
+    width: 20%;
+    border: 1px solid #777;
+    background-color: #666;
+    color: #111111;
+    text-align: center;
+    margin: 10px;
+}
+
+.submitButton:hover {
+    background-color: #aaa;
+}
+
+.generalActionButton {
+    height: 30px;
+    width: 20%;
+    background-color: darkgreen;
+    color: white;
+    border: 1px solid black;
+    float: right;
+    margin: 5px;
+    display: inline;
+}
+
+.generalActionButton:hover {
+    background-color: forestgreen;
+}
+
+.generalActionButtonRed {
+    height: 30px;
+    width: 20%;
+    background-color: darkred;
+    color: white;
+    border: 1px solid black;
+    float: right;
+    margin: 5px;
+    display: inline;
+}
+
+.generalActionButtonRed:hover {
+    background-color: firebrick;
+}
+
+.chooseAvailableTime {
+    width: 50%;
+    max-height: 2cm;
+    overflow: scroll;
+    border: 1px solid black;
+    margin: auto;
+}
+
+.hourChoice {
+    margin: 0;
+    height: 0.7cm;
+    float: left;
+    width: 100px;
+    display: inline;
+    border: 1px solid gray;
+}
+
+.multipleChoiceBox {
+    width: 20%;
+    max-height: 5cm;
+    overflow: scroll;
+    border: 1px solid black;
+    margin: auto;
+    text-align: left;
+}
+
+.featureChoice {
+    width: 100%;
+    height: 1cm;
+    background-color: white;
+    border: 1px solid gray;
+}
+
+.smallActionButton {
+    height: 30px;
+    width: 20%;
+    background-color: darkgreen;
+    color: white;
+    border: 1px solid black;
+}
+
+.smallActionButton:hover {
+    background-color: forestgreen;
+}
+
+.moreFeaturesInput {
+    margin: 0.5cm 0.2cm;
+    display: none;
+}
+
+.confirmAddButton {
+    background-color: darkgreen;
+    color: white;
+    border: 1px solid black;
+    display: none;
+}
+
+.confirmAddButton:hover {
+    background-color: forestgreen;
+}
+
+.displayDetailTable {
+    display: inline;
+    font-size: 20px;
+}
+
+.displayDetailTable tr {
+    width: 100%;
+    height: 3cm;
+}
+
+.displayDetailTable td {
+    width: 20%;
+    border-top: 1px solid #aaa;
+}
+
+.displayDetailTable td.fieldName {
+    width: 10%;
+    border-top: 1px solid #aaa;
+}
+
+.bigInputBox {
+    width: 35%;
+    margin: 5px;
+    height: 3cm;
+    resize: none;
+}
+
+.fieldValue {
+    word-break: break-all;
+    white-space: normal;
+}
