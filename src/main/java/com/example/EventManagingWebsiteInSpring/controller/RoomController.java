@@ -1,4 +1,4 @@
-package com.example.EventManagingWebsiteInSpring;
+package com.example.EventManagingWebsiteInSpring.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

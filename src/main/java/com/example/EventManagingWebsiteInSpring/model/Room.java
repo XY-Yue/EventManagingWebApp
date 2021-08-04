@@ -1,4 +1,4 @@
-package com.example.EventManagingWebsiteInSpring.controller.model;
+package com.example.EventManagingWebsiteInSpring.model;
 
 import java.io.Serializable;
 import java.text.DateFormat;
