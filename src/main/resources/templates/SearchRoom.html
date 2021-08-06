@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Start Searching</title>
+    <link rel="stylesheet" th:href="@{/css/MainStyle.css}"/>
+    <link rel="icon" type="image/jpg" th:href="@{/favicon.png}"/>
 </head>
 <body>
 <div class="contentBox">
@@ -89,7 +91,11 @@
         </form>
     </div>
     <div class="content mainContent">
-        <button class="generalActionButton clickable" th:>+ Add Room</button>
+        <form action="/addRoom" method="POST">
+            <input class="generalActionButton clickable" type="submit" value="+ Add Room">
+<!--            <button class="generalActionButton clickable" type="submit">+ Add Room</button>-->
+        </form>
+<!--        <button class="generalActionButton clickable" th:href>+ Add Room</button>-->
         <p id="searchResultTitle"></p>
         <dl class="displayItems" id="roomList"></dl>
         <div class="loadMoreContent clickable" id="moreRoomsButton">Load More</div>
