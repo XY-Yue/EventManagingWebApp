@@ -18,7 +18,7 @@ class Room implements Available{
     private final Integer capacity;
     private NavigableMap<Integer, Integer> availableTime;
     private final String roomName; //Check for uniqueness
-    private NavigableMap<Timestamp[], String> schedule;
+    private NavigableMap<Calendar[], String> schedule;
 
     private final List<String> features;
 
@@ -41,8 +41,8 @@ class Room implements Available{
 
         this.features = new ArrayList<>(features);
         this.roomName = roomName;
-        schedule = new TreeMap<> ((Comparator<Timestamp[]> & Serializable)
-                (Timestamp[] t1, Timestamp[]t2) -> {
+        schedule = new TreeMap<> ((Comparator<Calendar[]> & Serializable)
+                (Calendar[] t1, Calendar[]t2) -> {
                     // t1 == [startTime1, endTime1]
                     // t2 == [startTime2, endTime2]
                     // They won't overlap
@@ -71,7 +71,7 @@ class Room implements Available{
      * @param endTime End time of the interval
      * @return true iff the room is available during this interval
      */
-    protected boolean isAvailable(Timestamp startTime, Timestamp endTime) {
+    protected boolean isAvailable(Calendar startTime, Calendar endTime) {
         return this.isAvailable(this.schedule, startTime, endTime);
     }
 
@@ -117,9 +117,9 @@ class Room implements Available{
      * @param eventID A String representation of the event id
      * @return true iff event is added successfully
      */
-    protected boolean addEventToSchedule(SortedSet<Timestamp[]> timeDuration, String eventID) {
+    protected boolean addEventToSchedule(SortedSet<Calendar[]> timeDuration, String eventID) {
         // return schedule.putIfAbsent(new Timestamp[]{startTime, endTime}, eventID) == null
-        for (Timestamp[] t : timeDuration) {
+        for (Calendar[] t : timeDuration) {
             this.schedule.put(t, eventID);
         }
         return true; // Since we already check for available room
@@ -131,8 +131,8 @@ class Room implements Available{
      * @param eventName A String representation of the event id
      * @return true iff the event is removed successfully
      */
-    protected boolean removeEventFromSchedule(SortedSet<Timestamp[]> timeDuration, String eventName) {
-        for (Timestamp[] t : timeDuration) {
+    protected boolean removeEventFromSchedule(SortedSet<Calendar[]> timeDuration, String eventName) {
+        for (Calendar[] t : timeDuration) {
             schedule.remove(t, eventName);
         }
         return true; // Since we already check it
@@ -141,7 +141,7 @@ class Room implements Available{
     // This is a helper method for toString
     private String printSchedule(){
         StringBuilder sb = new StringBuilder();
-        for(Timestamp[] time: schedule.keySet()){
+        for(Calendar[] time: schedule.keySet()){
             sb.append("\n\t");
             sb.append("Event ");
             sb.append(schedule.get(time));
@@ -154,8 +154,8 @@ class Room implements Available{
         return sb.toString();
     }
 
-    private String getTime(Timestamp time) {
-        Date date = new Date(time.getTime());
+    private String getTime(Calendar time) {
+        Date date = new Date(time.getTimeInMillis());
         return DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG).format(date);
     }
 

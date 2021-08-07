@@ -1,6 +1,6 @@
 package com.example.EventManagingWebsiteInSpring.model;
 
-import java.sql.Timestamp;
+import java.util.Calendar;
 import java.util.NavigableMap;
 
 /**
@@ -16,11 +16,11 @@ public interface Available {
      * @param endTime End time of this interval
      * @return true iff this interval is available with given schedule
      */
-    default boolean isAvailable(NavigableMap<Timestamp[], String> schedule, Timestamp startTime, Timestamp endTime) {
+    default boolean isAvailable(NavigableMap<Calendar[], String> schedule, Calendar startTime, Calendar endTime) {
         // Assuming the given time is checked with isValidTimeSlots
-        Timestamp[] currTime = {startTime, endTime};
-        Timestamp[] lessThan = schedule.lowerKey(currTime);
-        Timestamp[] greaterThan;
+        Calendar[] currTime = {startTime, endTime};
+        Calendar[] lessThan = schedule.lowerKey(currTime);
+        Calendar[] greaterThan;
         if (lessThan == null) {
             greaterThan = schedule.higherKey(currTime);
             if (greaterThan == null) {
