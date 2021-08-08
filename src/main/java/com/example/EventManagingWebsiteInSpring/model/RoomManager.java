@@ -1,6 +1,5 @@
 package com.example.EventManagingWebsiteInSpring.model;
 
-import java.sql.Timestamp;
 import java.util.*;
 
 /**

@@ -3,7 +3,6 @@ package com.example.EventManagingWebsiteInSpring.model;
 import java.io.Serializable;
 import java.text.DateFormat;
 import java.util.*;
-import java.sql.Timestamp;
 
 /**
  * An entity class of Room.
