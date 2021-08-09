@@ -117,24 +117,23 @@ public class RoomManager {
     }
 
     private boolean checkRoomTimeSlots(SortedSet<Calendar[]> timeDuration, String roomName) {
-//        Room room = roomList.get(roomName);
-//        if (room == null) return false;
-//        for (Calendar[] s : timeDuration) {
-//            Calendar startTime = s[0];
-//            Calendar endTime = s[1];
-//            Calendar copy = (Calendar) startTime.clone();
-//            copy.setDate(startTime.getDate() + 1);
-//            if (!endTime.before(copy)) {
-//                return room.isValidTimeSlots(0, 24);
-//            }
-//            int minutes1 = startTime.getMinutes();
-//            int hour1 = (minutes1 == 0) ? startTime.getHours() : startTime.getHours() - 1;
-//            int minutes2 = endTime.getMinutes();
-//            int hour2 = (minutes2 == 0) ? endTime.getHours() : endTime.getHours() + 1;
-//            if (!room.isValidTimeSlots(hour1, hour2)) {
-//                return false;
-//            }
-//        }
+        Room room = roomList.get(roomName);
+        if (room == null) return false;
+        for (Calendar[] s : timeDuration) {
+            Calendar startTime = s[0];
+            Calendar endTime = s[1];
+
+            if (endTime.getTimeInMillis() - startTime.getTimeInMillis() >= 86400000) { // a day has 86400000 ms
+                return room.isValidTimeSlots(0, 24);
+            }
+            int minutes1 = startTime.get(Calendar.MINUTE);
+            int hour1 = (minutes1 == 0) ? startTime.get(Calendar.HOUR) : startTime.get(Calendar.HOUR) - 1;
+            int minutes2 = endTime.get(Calendar.MINUTE);
+            int hour2 = (minutes2 == 0) ? endTime.get(Calendar.HOUR) : endTime.get(Calendar.HOUR) + 1;
+            if (!room.isValidTimeSlots(hour1, hour2)) {
+                return false;
+            }
+        }
         return true;
     }
 
