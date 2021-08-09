@@ -189,6 +189,19 @@ class Room implements Available{
                 "This room has:" + ((features.size() == 0) ? "No features" : featuresString.toString());
     }
 
+    public RoomDataContainer toStringObject(){
+        StringBuilder featuresString = new StringBuilder();
+        for (String feature : features) featuresString.append(feature).append("; ");
+
+        return new RoomDataContainer(
+                this.roomName,
+                this.capacity,
+                printAvailableTime(),
+                this.printSchedule(),
+                featuresString.toString()
+        );
+    }
+
     /**
      * Checks if the room has the list of additional features
      * @param checkedFeatures A list of String representation of the additional features
