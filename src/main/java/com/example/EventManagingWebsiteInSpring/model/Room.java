@@ -189,6 +189,10 @@ class Room implements Available{
                 "This room has:" + ((features.size() == 0) ? "No features" : featuresString.toString());
     }
 
+    /**
+     * Formats the date of this room to strings, and assign them to a container object
+     * @return RoomDataContainer that contains all data of this room in strings
+     */
     public RoomDataContainer toStringObject(){
         StringBuilder featuresString = new StringBuilder();
         for (String feature : features) featuresString.append(feature).append("; ");

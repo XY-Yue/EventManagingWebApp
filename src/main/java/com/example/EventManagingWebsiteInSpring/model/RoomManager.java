@@ -208,5 +208,12 @@ public class RoomManager {
     boolean addFeature(String feature){
         return roomFeatureList.add(feature);
     }
+
+    public List<RoomDataContainer> searchRoomWithKeyword(String roomName, int capacity,
+                                                         int[] available, String features){
+        List<RoomDataContainer> output = new ArrayList<>();
+
+        return output;
+    }
 }
 
