@@ -22,6 +22,16 @@ public class RoomManager {
                 new ArrayList<>(Arrays.asList("Projector", "Row of chairs", "Table", "Computers"));
     }
 
+    // Writes all data to the xml file
+    private void saveData(){
+
+    }
+
+    // Read all room object from the xml file
+    private void readData(){
+
+    }
+
     /**
      * Gives the toString description of room with given name.
      * @param roomName the name of room ask for toString description
