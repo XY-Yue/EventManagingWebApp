@@ -9,12 +9,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class RoomController {
 
     @GetMapping("/searchRoom")
-    public String searchEvent(Model model){
+    public String searchRoom(Model model){
         return "SearchRoom";
     }
 
     @PostMapping("/addRoom")
-    public String addEvent(Model model){
+    public String addRoom(Model model){
         return "AddRoom";
+    }
+
+    @PostMapping("/addingRoom")
+    public String addingRoom(Model model, RoomInitDTO roomInit){
+        return "SearchRoom";
     }
 }

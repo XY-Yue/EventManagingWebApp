@@ -1,6 +1,6 @@
 package com.example.EventManagingWebsiteInSpring.controller;
 
-public class SearchFieldContainer {
+public class SearchFieldDTO {
     String nameKey;
     String availableStart;
     String availableEnd;
