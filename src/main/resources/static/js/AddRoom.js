@@ -15,6 +15,7 @@ function onChangeAvailableTime(){
         this.style.backgroundColor = SELECTED;
         addHourToAvailable(parseInt(this.innerHTML.toString()));
     }
+    document.getElementById("available").value = JSON.stringify(available);
 }
 
 function removeHourFromAvailable(hour){

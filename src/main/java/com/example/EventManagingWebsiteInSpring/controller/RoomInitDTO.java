@@ -1,7 +1,7 @@
 package com.example.EventManagingWebsiteInSpring.controller;
 
 public class RoomInitDTO {
-    String name;
+    String roomName;
     int capacity;
     String available;
 }
