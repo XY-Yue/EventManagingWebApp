@@ -34,3 +34,7 @@ function addHourToAvailable(hour){
         }
     }
 }
+
+function validateInput(){
+
+}
