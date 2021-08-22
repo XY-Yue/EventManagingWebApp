@@ -70,7 +70,7 @@ public class RoomManager {
      * @param features A list of String representation of additional features
      * @return true iff the room is added successfully
      */
-    boolean addRoom(int capacity, Integer[][] availableTime, String roomName, List<String> features) {
+    public boolean addRoom(int capacity, Integer[][] availableTime, String roomName, List<String> features) {
         // Return true if and only roomName is unique
         // Assume availableTime do not overlap, should check when user input
         if (roomList.get(roomName) == null) {
@@ -86,7 +86,7 @@ public class RoomManager {
      * @param roomName A String representation of the room name
      * @return true iff the room exists
      */
-    boolean hasRoom(String roomName) {
+    public boolean hasRoom(String roomName) {
         // Return true iff roomName is in the list
         // For controller to use this method check and then generates different information to the presenter
         // Anytime when asking user to enter room name, this method should be called

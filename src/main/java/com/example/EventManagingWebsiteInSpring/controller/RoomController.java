@@ -1,10 +1,15 @@
 package com.example.EventManagingWebsiteInSpring.controller;
 
+import com.example.EventManagingWebsiteInSpring.model.RoomManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.Collections;
+import java.util.Map;
 
 @Controller
 public class RoomController {
@@ -25,15 +30,17 @@ public class RoomController {
     }
 
     @PostMapping("/validateName")
-    public String validateRoomName(Model model, @RequestParam("roomName") String roomName){
-        return "";
+    @ResponseBody
+    public Map<String, Boolean> validateRoomName(Model model, @RequestParam("roomName") String roomName){
+        RoomManager rm = new RoomManager();
+        return Collections.singletonMap("status", validateRoomName(roomName, rm));
     }
 
-    private boolean validateRoomName(String roomName){
-        return false;
+    private boolean validateRoomName(String roomName, RoomManager rm){
+        return !rm.hasRoom(roomName);
     }
 
-    private void addRoom(RoomInitDTO roomInitDTO){
+    private void addRoom(RoomInitDTO roomInitDTO, RoomManager rm){
 
     }
 }
