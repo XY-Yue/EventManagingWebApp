@@ -5,6 +5,7 @@ const NOT_SELECTED = "white";
 for (let i = 0; i < 24; i++){
     document.getElementById("roomAvailable" + i).addEventListener("click", onChangeAvailableTime);
 }
+document.getElementById("continue").addEventListener("click", validateInput);
 
 // Respond user's click event on the buttons in the select hour field, changes its color
 function onChangeAvailableTime(){
@@ -36,5 +37,13 @@ function addHourToAvailable(hour){
 }
 
 function validateInput(){
+    document.getElementById("availableWarning").innerHTML = "";
+    document.getElementById("invalidNameWarning").innerHTML = "";
 
+    if (available.length === 0){
+        document.getElementById("availableWarning").innerHTML =
+            "Choose when room is available here";
+    }else{
+
+    }
 }

@@ -12,7 +12,7 @@
 <div class="contentBox">
     <div class="content fullContent">
         <h1>Add a new room</h1>
-        <form>
+        <form th:action="@{/addingRoom}" method="post">
             <label for="roomName">Room Name: </label>
             <input class="userInputField" type="text" id="roomName" required
                    name="roomName" placeholder="Enter room name here...">
