@@ -39,11 +39,29 @@ function addHourToAvailable(hour){
 function validateInput(){
     document.getElementById("availableWarning").innerHTML = "";
     document.getElementById("invalidNameWarning").innerHTML = "";
-
+    let roomName = document.getElementById("roomName").value.toString();
     if (available.length === 0){
         document.getElementById("availableWarning").innerHTML =
             "Choose when room is available here";
-    }else{
-
+    }else if (roomName === ""){
+        document.getElementById("invalidNameWarning").innerHTML =
+            "Room name cannot be empty.";
+    }else {
+        $.ajax({
+            type: 'post',
+            url: 'validateName?roomName=' + roomName,
+            success: function (response) {
+                if (response['status']){
+                    // The input are all valid, submit the form.
+                    document.getElementById("roomAddingSubmit").submit();
+                }else {
+                    document.getElementById("invalidNameWarning").innerHTML =
+                        "Room name already exist.";
+                }
+            },
+            error: function (e) {
+                console.log("Room name validation failed.")
+            }
+        })
     }
 }
