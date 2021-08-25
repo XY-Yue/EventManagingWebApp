@@ -5,6 +5,8 @@
     <title>Start Searching</title>
     <link rel="stylesheet" th:href="@{/css/MainStyle.css}"/>
     <link rel="icon" type="image/jpg" th:href="@{/favicon.png}"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script th:href="@{/js/SearchRoom.js}" type="text/javascript"></script>
 </head>
 <body>
 <div class="contentBox">
@@ -81,13 +83,14 @@
                 </select><br>
             </div>
 
-            <div class="searchField">
-                Has features:
-                <div class="multipleChoiceBox" id="features" style="width: 80%">
-                </div>
-            </div>
+<!--            <div class="searchField">-->
+<!--                Has features:-->
+<!--                <div class="multipleChoiceBox" id="features" style="width: 80%">-->
+<!--                </div>-->
+<!--            </div>-->
 
-            <input type="submit">
+            <button class="submitButton clickable" id="continue">Apply</button>
+            <input type="submit" id="roomSearchingSubmit" style="display: none">
         </form>
     </div>
     <div class="content mainContent">
@@ -95,7 +98,7 @@
             <input class="generalActionButton clickable" type="submit" value="+ Add Room">
         </form>
         <p id="searchResultTitle"></p>
-        <dl class="displayItems" id="roomList"></dl>
+        <dl class="displayItems" id="roomListPlaceHolder"></dl>
         <div class="loadMoreContent clickable" id="moreRoomsButton">Load More</div>
     </div>
 </div>

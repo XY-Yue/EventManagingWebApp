@@ -224,11 +224,10 @@ public class RoomManager {
      * @param roomNameKey key that room name should contain
      * @param capacity minimum capacity for the desired rooms
      * @param available minimum interval the room should be available
-     * @param features minimum features the room need to have
      * @return a list of room data containers that contains all information of the desired rooms.
      */
     public List<RoomDataContainer> searchRoomWithKeyword(String roomNameKey, int capacity,
-                                                         int[] available, List<String> features){
+                                                         int[] available/*, List<String> features*/){
         List<RoomDataContainer> output = new ArrayList<>();
 
         for (String name : roomList.keySet()){
@@ -241,9 +240,9 @@ public class RoomManager {
                 if (room.getCapacity() < capacity){
                     continue;
                 }
-                if (!room.hasFeatures(features)){
-                    continue;
-                }
+//                if (!room.hasFeatures(features)){
+//                    continue;
+//                }
                 output.add(room.toStringObject());
             }
         }

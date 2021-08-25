@@ -1,12 +1,10 @@
 package com.example.EventManagingWebsiteInSpring.controller;
 
+import com.example.EventManagingWebsiteInSpring.model.RoomDataContainer;
 import com.example.EventManagingWebsiteInSpring.model.RoomManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -17,17 +15,24 @@ import java.util.Map;
 public class RoomController {
 
     @GetMapping("/searchRoom")
-    public String searchRoom(Model model){
+    public String searchRoom(){
         return "SearchRoom";
     }
 
-    @PostMapping("/addRoom")
-    public String addRoom(Model model){
+    @RequestMapping("/addRoom")
+    public String addRoom(){
         return "AddRoom";
     }
 
+    @PostMapping("/startSearch")
+    public String startSearchRoom(Model model, @RequestBody SearchFieldDTO roomSearch){
+        List<RoomDataContainer> resultRoom = roomSearcher(roomSearch, new RoomManager());
+        model.addAttribute("searchResult", resultRoom);
+        return "RoomListDisplay :: roomDisplay";
+    }
+
     @PostMapping("/addingRoom")
-    public String addingRoom(Model model, RoomInitDTO roomInit){
+    public String addingRoom(RoomInitDTO roomInit){
         RoomManager rm = new RoomManager();
         addRoom(roomInit, rm);
         return "SearchRoom";
@@ -46,7 +51,7 @@ public class RoomController {
 
     private void addRoom(RoomInitDTO roomInitDTO, RoomManager rm){
         rm.addRoom(roomInitDTO.capacity, parseAvailableTime(roomInitDTO.available),
-                roomInitDTO.roomName, new ArrayList<>()/* TODO: features of rooms */);
+                roomInitDTO.roomName, new ArrayList<>());
     }
 
     private Integer[][] parseAvailableTime(String available){
@@ -67,5 +72,20 @@ public class RoomController {
             i = j;
         }
         return availableTimes.toArray(new Integer[0][]);
+    }
+
+    private List<RoomDataContainer> roomSearcher(SearchFieldDTO roomSearch, RoomManager rm){
+        int[] available = new int[2];
+        if (roomSearch.getAvailableEnd().equals("-") || roomSearch.getAvailableStart().equals("-")){
+            available = null;
+        }else {
+            available[0] = Integer.parseInt(roomSearch.getAvailableStart());
+            available[1] = Integer.parseInt(roomSearch.getAvailableEnd());
+        }
+        return rm.searchRoomWithKeyword(
+                roomSearch.getNameKey(),
+                roomSearch.getCapacity(),
+                available
+        );
     }
 }
