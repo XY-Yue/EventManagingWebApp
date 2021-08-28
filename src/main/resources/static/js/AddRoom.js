@@ -3,7 +3,9 @@ const SELECTED = "forestgreen";
 const NOT_SELECTED = "white";
 
 for (let i = 0; i < 24; i++){
-    document.getElementById("roomAvailable" + i).addEventListener("click", onChangeAvailableTime);
+    let element = document.getElementById("roomAvailable" + i.toString());
+    element.addEventListener("click", onChangeAvailableTime);
+    element.style.backgroundColor = NOT_SELECTED;
 }
 document.getElementById("continue").addEventListener("click", validateInput);
 
@@ -28,6 +30,10 @@ function removeHourFromAvailable(hour){
 }
 
 function addHourToAvailable(hour){
+    if (available.length === 0){
+        available.push(hour);
+        return;
+    }
     for (let i = 0; i < available.length; i++){
         if (available[i] > hour) {
             available.splice(i, 0, hour);
@@ -53,7 +59,7 @@ function validateInput(){
             success: function (response) {
                 if (response['status']){
                     // The input are all valid, submit the form.
-                    document.getElementById("roomAddingSubmit").submit();
+                    document.getElementById("roomForm").submit();
                 }else {
                     document.getElementById("invalidNameWarning").innerHTML =
                         "Room name already exist.";

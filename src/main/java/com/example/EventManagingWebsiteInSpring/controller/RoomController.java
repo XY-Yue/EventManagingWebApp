@@ -31,7 +31,7 @@ public class RoomController {
         return "RoomListDisplay :: roomDisplay";
     }
 
-    @PostMapping("/addingRoom")
+    @RequestMapping("/addingRoom")
     public String addingRoom(RoomInitDTO roomInit){
         RoomManager rm = new RoomManager();
         addRoom(roomInit, rm);

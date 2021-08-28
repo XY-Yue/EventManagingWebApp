@@ -1,7 +1,6 @@
 window.onload = startSearch;
 document.getElementById("continue").addEventListener("click", startSearch);
 
-
 function startSearch(){
     let roomKeyword = document.getElementById("roomName").value.toString();
     let capacity = parseInt(document.getElementById("capacity").value.toString());
