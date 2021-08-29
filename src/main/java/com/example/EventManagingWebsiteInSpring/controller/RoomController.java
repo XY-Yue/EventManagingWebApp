@@ -28,7 +28,7 @@ public class RoomController {
     public String startSearchRoom(Model model, @RequestBody SearchFieldDTO roomSearch){
         List<RoomDataContainer> resultRoom = roomSearcher(roomSearch, new RoomManager());
         model.addAttribute("searchResult", resultRoom);
-        return "RoomListDisplay :: roomDisplay";
+        return "RoomListDisplay";
     }
 
     @RequestMapping("/addingRoom")

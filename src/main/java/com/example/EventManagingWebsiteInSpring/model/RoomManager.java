@@ -1,5 +1,6 @@
 package com.example.EventManagingWebsiteInSpring.model;
 
+import java.io.*;
 import java.util.*;
 
 /**
@@ -22,14 +23,22 @@ public class RoomManager {
                 new ArrayList<>(Arrays.asList("Projector", "Row of chairs", "Table", "Computers"));
     }
 
-    // Writes all data to the xml file
+    // Writes all data to a file
     private void saveData(){
-
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter("room_data.txt"));
+        }catch (IOException iox){
+            System.out.println("File writing failed.");
+        }
     }
 
-    // Read all room object from the xml file
+    // Read all room object from a file
     private void readData(){
-
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader("room_data.txt"));
+        }catch (IOException iox){
+            System.out.println("File reading failed.");
+        }
     }
 
     /**
@@ -106,11 +115,11 @@ public class RoomManager {
         if (room == null) {
             return false;
         }
-        for (Calendar[] s : timeDuration) {
-            if (!room.isAvailable(s[0], s[1])) {
-                return false;
-            }
-        }
+//        for (Calendar[] s : timeDuration) {
+//            if (!room.isAvailable(s[0], s[1])) {
+//                return false;
+//            }
+//        }
         return true;
     }
 
@@ -123,7 +132,7 @@ public class RoomManager {
      */
     public boolean checkRoomAvailability(Calendar startTime, Calendar endTime, String roomName) {
         Room room = roomList.get(roomName);
-        return room != null && room.isAvailable(startTime, endTime);
+        return room != null /*&& room.isAvailable(startTime, endTime)*/;
     }
 
     private boolean checkRoomTimeSlots(SortedSet<Calendar[]> timeDuration, String roomName) {
@@ -147,29 +156,29 @@ public class RoomManager {
         return true;
     }
 
-    /**
-     * Adds an event to a room
-     * @param roomName A String representation of the room name
-     * @param eventID A String representation of the event id
-     * @param timeDuration A sorted collection of time interval where start time is at index 0 and end time is index 1
-     * @return true iff the event is added successfully
-     */
-    public boolean addEventToRoom(String roomName, String eventID, SortedSet<Calendar[]> timeDuration) {
-        // Return boolean not String so controller knows what needs to send to presenter
-        return roomList.get(roomName) != null && roomList.get(roomName).addEventToSchedule(timeDuration, eventID);
-    }
-
-    /**
-     * Removes an event from a room
-     * @param roomName A String representation of the room name
-     * @param eventName A String representation of the event id
-     * @param timeDuration A sorted collection of time interval where start time is at index 0 and end time is index 1
-     * @return true iff the event is removed successfully
-     */
-    public boolean removeEventFromRoom(String roomName, String eventName, SortedSet<Calendar[]> timeDuration) {
-        return roomList.get(roomName) != null && roomList.get(roomName).
-                removeEventFromSchedule(timeDuration, eventName);
-    }
+//    /**
+//     * Adds an event to a room
+//     * @param roomName A String representation of the room name
+//     * @param eventID A String representation of the event id
+//     * @param timeDuration A sorted collection of time interval where start time is at index 0 and end time is index 1
+//     * @return true iff the event is added successfully
+//     */
+//    public boolean addEventToRoom(String roomName, String eventID, SortedSet<Calendar[]> timeDuration) {
+//        // Return boolean not String so controller knows what needs to send to presenter
+//        return roomList.get(roomName) != null && roomList.get(roomName).addEventToSchedule(timeDuration, eventID);
+//    }
+//
+//    /**
+//     * Removes an event from a room
+//     * @param roomName A String representation of the room name
+//     * @param eventName A String representation of the event id
+//     * @param timeDuration A sorted collection of time interval where start time is at index 0 and end time is index 1
+//     * @return true iff the event is removed successfully
+//     */
+//    public boolean removeEventFromRoom(String roomName, String eventName, SortedSet<Calendar[]> timeDuration) {
+//        return roomList.get(roomName) != null && roomList.get(roomName).
+//                removeEventFromSchedule(timeDuration, eventName);
+//    }
 
     /**
      * Gets the room capacity

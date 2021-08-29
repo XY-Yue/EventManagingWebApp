@@ -16,13 +16,12 @@ function startSearch(){
             availableStart: startHour,
             availableEnd: endHour
         }),
-        dataType: 'json',
         contentType: 'application/json',
         success: function (response) {
             document.getElementById("roomListPlaceHolder").innerHTML = response;
         },
         error: function (e) {
-            console.log("Error!  " + e.toString());
+            console.log("Error!  " + JSON.stringify(e));
         }
     });
 }
