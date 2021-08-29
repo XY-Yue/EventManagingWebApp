@@ -3,7 +3,6 @@ package com.example.EventManagingWebsiteInSpring.model;
 import java.io.Serializable;
 import java.text.DateFormat;
 import java.util.*;
-import com.google.gson.*;
 
 /**
  * An entity class of Room.
@@ -23,18 +22,18 @@ class Room /*implements Available*/{
     /**
      * Constructs a Room object
      * @param capacity Maximum capacity of this room
-     * @param availableTimeSlots Time slots that this room is available
+     * @param availableTime Time slots that this room is available
      * @param roomName An unique String representation of the room name
      * @param features A List of additional features that this room can provide
      */
-    protected Room(int capacity, Integer[][] availableTimeSlots, String roomName, List<String> features) {
+    protected Room(int capacity, Integer[][] availableTime, String roomName, List<String> features) {
         // Assume availableTimeSlops do not overlap
         // A list of [[start time 1, end time 1], [start time 2, end time 2]]
         this.capacity = capacity;
         this.availableTime = new TreeMap<>();
 
-        for (Integer[] lst: availableTimeSlots) {
-            availableTime.put(lst[0], lst[1]);
+        for (Integer[] lst: availableTime) {
+            this.availableTime.put(lst[0], lst[1]);
         }
 
         this.features = new ArrayList<>(features);
@@ -212,5 +211,9 @@ class Room /*implements Available*/{
      */
     protected boolean hasFeatures(List<String> checkedFeatures){
         return features.containsAll(checkedFeatures);
+    }
+
+    public String getRoomName() {
+        return roomName;
     }
 }

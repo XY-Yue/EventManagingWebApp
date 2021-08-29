@@ -1,5 +1,7 @@
 package com.example.EventManagingWebsiteInSpring.model;
 
+import com.google.gson.Gson;
+
 import java.io.*;
 import java.util.*;
 
@@ -12,7 +14,7 @@ import java.util.*;
  */
 public class RoomManager {
     private final Map<String, Room> roomList;
-    private final List<String> roomFeatureList;
+    private List<String> roomFeatureList;
 
     /**
      * Constructs the RoomManager object
@@ -21,12 +23,21 @@ public class RoomManager {
         roomList = new HashMap<>();
         roomFeatureList =
                 new ArrayList<>(Arrays.asList("Projector", "Row of chairs", "Table", "Computers"));
+        readData();
     }
 
     // Writes all data to a file
     private void saveData(){
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter("room_data.txt"));
+            Gson g = new Gson();
+            writer.write(g.toJson(roomFeatureList));
+            writer.newLine();
+            for (Room room : roomList.values()){
+                writer.write(g.toJson(room));
+                writer.newLine();
+            }
+            writer.close();
         }catch (IOException iox){
             System.out.println("File writing failed.");
         }
@@ -36,8 +47,16 @@ public class RoomManager {
     private void readData(){
         try {
             BufferedReader reader = new BufferedReader(new FileReader("room_data.txt"));
+            Gson g = new Gson();
+            this.roomFeatureList = Arrays.asList(g.fromJson(reader.readLine(), String[].class));
+            String line = reader.readLine();
+            while (line != null && line.length() != 0){
+                Room room = g.fromJson(line, Room.class);
+                this.roomList.put(room.getRoomName(), room);
+                line = reader.readLine();
+            }
         }catch (IOException iox){
-            System.out.println("File reading failed.");
+            System.out.println("File not found.");
         }
     }
 
@@ -85,6 +104,7 @@ public class RoomManager {
         if (roomList.get(roomName) == null) {
             Room room = new Room(capacity, availableTime, roomName, features);
             roomList.put(roomName, room);
+            saveData();
             return true;
         }
         return false;
