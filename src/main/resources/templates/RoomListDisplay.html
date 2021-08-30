@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <div th:fragment="roomDisplay">
     <div th:each="room : ${searchResult}">
-        <dt th:text="${room.name}">
+        <dt th:text="${room.roomName}">
             <dd th:text="'capacity: ' + ${room.capacity}"></dd>
             <dd th:text="'Available at: ' + ${room.availableTime}"></dd>
         </dt>

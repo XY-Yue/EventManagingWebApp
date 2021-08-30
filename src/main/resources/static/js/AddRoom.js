@@ -30,16 +30,13 @@ function removeHourFromAvailable(hour){
 }
 
 function addHourToAvailable(hour){
-    if (available.length === 0){
-        available.push(hour);
-        return;
-    }
     for (let i = 0; i < available.length; i++){
         if (available[i] > hour) {
             available.splice(i, 0, hour);
-            break;
+            return;
         }
     }
+    available.push(hour);
 }
 
 function validateInput(){

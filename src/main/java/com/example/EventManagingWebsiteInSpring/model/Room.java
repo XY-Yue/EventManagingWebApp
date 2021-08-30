@@ -27,9 +27,9 @@ class Room /*implements Available*/{
      * @param features A List of additional features that this room can provide
      */
     protected Room(int capacity, Integer[][] availableTime, String roomName, List<String> features) {
-        // Assume availableTimeSlops do not overlap
-        // A list of [[start time 1, end time 1], [start time 2, end time 2]]
         this.capacity = capacity;
+        // Assume availableTimeSlots do not overlap
+        // A list of [[start time 1, end time 1], [start time 2, end time 2]]
         this.availableTime = new TreeMap<>();
 
         for (Integer[] lst: availableTime) {

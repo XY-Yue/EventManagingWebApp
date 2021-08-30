@@ -31,11 +31,11 @@ public class RoomController {
         return "RoomListDisplay";
     }
 
-    @RequestMapping("/addingRoom")
+    @RequestMapping(value = "/addingRoom", method = RequestMethod.POST)
     public String addingRoom(RoomInitDTO roomInit){
         RoomManager rm = new RoomManager();
         addRoom(roomInit, rm);
-        return "SearchRoom";
+        return "redirect:searchRoom";
     }
 
     @PostMapping("/validateName")
@@ -63,11 +63,11 @@ public class RoomController {
         while (i < availableHours.length){
             int j = i + 1;
             while (j < availableHours.length && Integer.parseInt(availableHours[j]) ==
-                    Integer.parseInt(availableHours[j - 1] + 1)){
+                    Integer.parseInt(availableHours[j - 1]) + 1){
                 j++;
             }
             availableTimes.add(new Integer[]{Integer.parseInt(availableHours[i]),
-                    Integer.parseInt(availableHours[j - 1] + 1)});
+                    Integer.parseInt(availableHours[j - 1]) + 1});
 
             i = j;
         }
