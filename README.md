@@ -18,6 +18,6 @@ More importantly, if I continue to build the application now, I will probabaly b
 
 ## What I learned here
 1. Basic Spring MVC including how to handle requests and how to include data to be displayed on the UI.
-2. Basic Thymeleaf, including variables, iterations, etc.
+2. Basic Thymeleaf in HTML pages, including variables, iterations, etc.
 3. Looked at Spring's dependency injection tools.
 4. Sending async requests to the server using ajax on the client, and handling the response data.
