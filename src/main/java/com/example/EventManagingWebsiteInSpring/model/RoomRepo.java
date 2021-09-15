@@ -1,4 +1,7 @@
 package com.example.EventManagingWebsiteInSpring.model;
 
-public interface RoomRepo {
+import org.springframework.data.repository.CrudRepository;
+
+public interface RoomRepo extends CrudRepository<Room, Integer> {
+
 }
