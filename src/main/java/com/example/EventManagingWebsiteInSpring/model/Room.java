@@ -3,7 +3,6 @@ package com.example.EventManagingWebsiteInSpring.model;
 import java.io.Serializable;
 import java.text.DateFormat;
 import java.util.*;
-import javax.persistence.Entity;
 
 /**
  * An entity class of Room.
@@ -12,7 +11,6 @@ import javax.persistence.Entity;
  * availableTime is a map that maps the start hour to end hour of the room open time, 0 <= start time <= 23 and
  * 1 <= end time <= 24, and no overlap.
  */
-@Entity
 public class Room /*implements Available*/{
     private final int capacity;
     private final NavigableMap<Integer, Integer> availableTime;
