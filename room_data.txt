@@ -1,4 +1,5 @@
 ["Projector","Row of chairs","Table","Computers"]
+{"capacity":100,"availableTime":{"1":6,"7":12,"13":18,"19":24},"roomName":"GB221","features":[]}
 {"capacity":156,"availableTime":{"4":11,"12":20},"roomName":"BA1160","features":[]}
 {"capacity":1000,"availableTime":{"11":24},"roomName":"CH","features":[]}
 {"capacity":30,"availableTime":{"7":19},"roomName":"BA4075","features":[]}
