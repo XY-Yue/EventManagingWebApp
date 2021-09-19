@@ -1,7 +1,11 @@
-package com.example.EventManagingWebsiteInSpring.controller;
+package com.example.EventManagingWebsiteInSpring.model;
 
+import com.example.EventManagingWebsiteInSpring.controller.RoomInitDTO;
+import com.example.EventManagingWebsiteInSpring.controller.SearchFieldDTO;
 import com.example.EventManagingWebsiteInSpring.model.RoomDataContainer;
 import com.example.EventManagingWebsiteInSpring.model.RoomManager;
+import com.example.EventManagingWebsiteInSpring.model.RoomRepo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +17,9 @@ import java.util.Map;
 
 @Controller
 public class RoomController {
+
+    @Autowired
+    private RoomRepo repo;
 
     @GetMapping("/searchRoom")
     public String searchRoom(){
@@ -50,8 +57,8 @@ public class RoomController {
     }
 
     private void addRoom(RoomInitDTO roomInitDTO, RoomManager rm){
-        rm.addRoom(roomInitDTO.capacity, parseAvailableTime(roomInitDTO.available),
-                roomInitDTO.roomName, new ArrayList<>());
+        rm.addRoom(roomInitDTO.getCapacity(), parseAvailableTime(roomInitDTO.getAvailable()),
+                roomInitDTO.getRoomName(), new ArrayList<>(), repo);
     }
 
     private Integer[][] parseAvailableTime(String available){

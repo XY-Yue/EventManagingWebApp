@@ -79,14 +79,14 @@ public class RoomManager {
     public List<String> availableRooms(SortedSet<Calendar[]> timeDuration,
                                        List<String> features, int capacity){
         List<String> result = new ArrayList<>();
-        for (String room : roomList.keySet()){
-            if (roomList.get(room) != null && roomList.get(room).hasFeatures(features)) {
-                if (this.checkRoomAvailability(timeDuration, room) && checkRoomTimeSlots(timeDuration, room))
-                    if (roomList.get(room).getCapacity() >= capacity) {
-                        result.add(room);
-                    }
-            }
-        }
+//        for (String room : roomList.keySet()){
+//            if (roomList.get(room) != null && roomList.get(room).hasFeatures(features)) {
+//                if (this.checkRoomAvailability(timeDuration, room) && checkRoomTimeSlots(timeDuration, room))
+//                    if (roomList.get(room).getCapacity() >= capacity) {
+//                        result.add(room);
+//                    }
+//            }
+//        }
         return result;
     }
 
@@ -98,13 +98,15 @@ public class RoomManager {
      * @param features A list of String representation of additional features
      * @return true iff the room is added successfully
      */
-    public boolean addRoom(int capacity, Integer[][] availableTime, String roomName, List<String> features) {
+    public boolean addRoom(int capacity, Integer[][] availableTime, String roomName, List<String> features,
+                           RoomRepo repo) {
         // Return true if and only roomName is unique
         // Assume availableTime do not overlap, should check when user input
         if (roomList.get(roomName) == null) {
             Room room = new Room(capacity, availableTime, roomName, features);
             roomList.put(roomName, room);
             saveData();
+            repo.save(room);
             return true;
         }
         return false;

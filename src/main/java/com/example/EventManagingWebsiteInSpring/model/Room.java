@@ -3,7 +3,7 @@ package com.example.EventManagingWebsiteInSpring.model;
 import java.io.Serializable;
 import java.text.DateFormat;
 import java.util.*;
-import javax.persistence.Entity;
+import javax.persistence.*;
 
 /**
  * An entity class of Room.
@@ -14,12 +14,17 @@ import javax.persistence.Entity;
  */
 @Entity
 public class Room /*implements Available*/{
-    private final int capacity;
-    private final NavigableMap<Integer, Integer> availableTime;
-    private final String roomName; //Checked for uniqueness
+    @Column
+    private int capacity;
+//    private NavigableMap<Integer, Integer> availableTime;
+    @Column
+    private String roomName; //Checked for uniqueness
 //    private final NavigableMap<Calendar[], String> schedule;
 
-    private final List<String> features;
+//    private List<String> features;
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    private Integer id;
 
     /**
      * Constructs a Room object
@@ -32,13 +37,13 @@ public class Room /*implements Available*/{
         this.capacity = capacity;
         // Assume availableTimeSlots do not overlap
         // A list of [[start time 1, end time 1], [start time 2, end time 2]]
-        this.availableTime = new TreeMap<>();
+//        this.availableTime = new TreeMap<>();
 
-        for (Integer[] lst: availableTime) {
-            this.availableTime.put(lst[0], lst[1]);
-        }
+//        for (Integer[] lst: availableTime) {
+//            this.availableTime.put(lst[0], lst[1]);
+//        }
 
-        this.features = new ArrayList<>(features);
+//        this.features = new ArrayList<>(features);
         this.roomName = roomName;
 //        schedule = new TreeMap<> ((Comparator<Calendar[]> & Serializable)
 //                (Calendar[] t1, Calendar[]t2) -> {
@@ -54,6 +59,10 @@ public class Room /*implements Available*/{
 //                    return 0;
 //                }
 //        );
+    }
+
+    public Room() {
+
     }
 
     /**
@@ -81,32 +90,32 @@ public class Room /*implements Available*/{
      * @return true iff this room is open during this interval
      */
     protected boolean isValidTimeSlots(int startHour1, int endHour2) {
-        // Case if startHour 1 == endHour2
-        if (startHour1 == endHour2) {
-            if (availableTime.get(startHour1) != null) {
-                return true;
-            }
-            Map.Entry<Integer, Integer> timeslot1 = availableTime.lowerEntry(startHour1);
-            return timeslot1.getValue() >= startHour1;
-        } else if (startHour1 < endHour2) {
-            // Case if start hour < end hour
-            Integer endTime = availableTime.get(startHour1);
-            if (endTime != null && endTime >= endHour2) {
-                return true;
-            } else {
-                Map.Entry<Integer, Integer> timeslot1 = availableTime.lowerEntry(startHour1);
-                Map.Entry<Integer, Integer> timeslot2 = availableTime.lowerEntry(endHour2);
-                if (timeslot1 != null && timeslot2 != null) {
-                    if (timeslot1.equals(timeslot2)) {
-                        return true;
-                    }
-                    return timeslot1.getValue().equals(timeslot2.getKey());
-                }
-            }
-        } else {
-            // Case iff end hour < start hour
-            return isValidTimeSlots(0, startHour1) && isValidTimeSlots(endHour2, 24);
-        }
+//        // Case if startHour 1 == endHour2
+//        if (startHour1 == endHour2) {
+//            if (availableTime.get(startHour1) != null) {
+//                return true;
+//            }
+//            Map.Entry<Integer, Integer> timeslot1 = availableTime.lowerEntry(startHour1);
+//            return timeslot1.getValue() >= startHour1;
+//        } else if (startHour1 < endHour2) {
+//            // Case if start hour < end hour
+//            Integer endTime = availableTime.get(startHour1);
+//            if (endTime != null && endTime >= endHour2) {
+//                return true;
+//            } else {
+//                Map.Entry<Integer, Integer> timeslot1 = availableTime.lowerEntry(startHour1);
+//                Map.Entry<Integer, Integer> timeslot2 = availableTime.lowerEntry(endHour2);
+//                if (timeslot1 != null && timeslot2 != null) {
+//                    if (timeslot1.equals(timeslot2)) {
+//                        return true;
+//                    }
+//                    return timeslot1.getValue().equals(timeslot2.getKey());
+//                }
+//            }
+//        } else {
+//            // Case iff end hour < start hour
+//            return isValidTimeSlots(0, startHour1) && isValidTimeSlots(endHour2, 24);
+//        }
         return false;
     }
 
@@ -164,30 +173,30 @@ public class Room /*implements Available*/{
      */
     protected String printAvailableTime() {
         List<String> lst = new ArrayList<>();
-        for(Integer startTime: availableTime.keySet()) {
-            lst.add(startTime.toString() + "-" + availableTime.get(startTime).toString());
-        }
+//        for(Integer startTime: availableTime.keySet()) {
+//            lst.add(startTime.toString() + "-" + availableTime.get(startTime).toString());
+//        }
         return String.join(", ", lst);
     }
 
-    /**
-     * Represents the string contains all information of room.
-     * @return toString description of room
-     */
-    @Override
-    public String toString(){
-        StringBuilder featuresString = new StringBuilder();
-
-        for (String feature : features) featuresString.append(feature).append("; ");
-        if (featuresString.length() != 0) featuresString.replace(
-                featuresString.length() - 2, featuresString.length(), ".");
-
-        return "The name of this room is: " + roomName + "\n" +
-                "The capacity of this room is: " + capacity + "\n" +
-                "The room is available during: " + printAvailableTime() + "\n" +
-//                "The schedule of this room is: " + this.printSchedule() + "\n" +
-                "This room has:" + ((features.size() == 0) ? "No features" : featuresString.toString());
-    }
+//    /**
+//     * Represents the string contains all information of room.
+//     * @return toString description of room
+//     */
+//    @Override
+//    public String toString(){
+//        StringBuilder featuresString = new StringBuilder();
+//
+//        for (String feature : features) featuresString.append(feature).append("; ");
+//        if (featuresString.length() != 0) featuresString.replace(
+//                featuresString.length() - 2, featuresString.length(), ".");
+//
+//        return "The name of this room is: " + roomName + "\n" +
+//                "The capacity of this room is: " + capacity + "\n" +
+//                "The room is available during: " + printAvailableTime() + "\n" +
+////                "The schedule of this room is: " + this.printSchedule() + "\n" +
+//                "This room has:" + ((features.size() == 0) ? "No features" : featuresString.toString());
+//    }
 
     /**
      * Formats the date of this room to strings, and assign them to a container object
@@ -195,7 +204,7 @@ public class Room /*implements Available*/{
      */
     protected RoomDataContainer toStringObject(){
         StringBuilder featuresString = new StringBuilder();
-        for (String feature : features) featuresString.append(feature).append("; ");
+//        for (String feature : features) featuresString.append(feature).append("; ");
 
         return new RoomDataContainer(
                 this.roomName,
@@ -206,16 +215,24 @@ public class Room /*implements Available*/{
         );
     }
 
-    /**
-     * Checks if the room has the list of additional features
-     * @param checkedFeatures A list of String representation of the additional features
-     * @return true iff the room has all the features given by
-     */
-    protected boolean hasFeatures(List<String> checkedFeatures){
-        return features.containsAll(checkedFeatures);
-    }
+//    /**
+//     * Checks if the room has the list of additional features
+//     * @param checkedFeatures A list of String representation of the additional features
+//     * @return true iff the room has all the features given by
+//     */
+//    protected boolean hasFeatures(List<String> checkedFeatures){
+//        return features.containsAll(checkedFeatures);
+//    }
 
     public String getRoomName() {
         return roomName;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getId() {
+        return id;
     }
 }

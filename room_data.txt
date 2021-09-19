@@ -1,8 +1,13 @@
 ["Projector","Row of chairs","Table","Computers"]
-{"capacity":100,"availableTime":{"1":6,"7":12,"13":18,"19":24},"roomName":"GB221","features":[]}
-{"capacity":156,"availableTime":{"4":11,"12":20},"roomName":"BA1160","features":[]}
-{"capacity":1000,"availableTime":{"11":24},"roomName":"CH","features":[]}
-{"capacity":30,"availableTime":{"7":19},"roomName":"BA4075","features":[]}
-{"capacity":196,"availableTime":{"5":12,"14":21},"roomName":"BA1130","features":[]}
-{"capacity":500,"availableTime":{"0":24},"roomName":"MY150","features":[]}
-{"capacity":100,"availableTime":{"8":20},"roomName":"SS1074","features":[]}
+{"capacity":200,"roomName":"MP203"}
+{"capacity":50,"roomName":"MP137"}
+{"capacity":100,"roomName":"GB221"}
+{"capacity":200,"roomName":"MP102"}
+{"capacity":156,"roomName":"BA1160"}
+{"capacity":200,"roomName":"MP103"}
+{"capacity":200,"roomName":"MP202"}
+{"capacity":1000,"roomName":"CH"}
+{"capacity":30,"roomName":"BA4075"}
+{"capacity":196,"roomName":"BA1130"}
+{"capacity":500,"roomName":"MY150"}
+{"capacity":100,"roomName":"SS1074"}
