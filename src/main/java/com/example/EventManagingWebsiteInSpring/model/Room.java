@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.text.DateFormat;
 import java.util.*;
 import javax.persistence.*;
+import com.google.gson.Gson;
 
 /**
  * An entity class of Room.
@@ -13,15 +14,15 @@ import javax.persistence.*;
  * 1 <= end time <= 24, and no overlap.
  */
 @Entity
-public class Room /*implements Available*/{
-    @Column
+public class Room implements Serializable /*Available*/{
     private int capacity;
-//    private NavigableMap<Integer, Integer> availableTime;
-    @Column
+    @Transient
+    private NavigableMap<Integer, Integer> availableTime;
+    private String availableTimeJSON;
     private String roomName; //Checked for uniqueness
 //    private final NavigableMap<Calendar[], String> schedule;
-
-//    private List<String> features;
+    @ElementCollection
+    private List<String> features;
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Integer id;
@@ -37,13 +38,13 @@ public class Room /*implements Available*/{
         this.capacity = capacity;
         // Assume availableTimeSlots do not overlap
         // A list of [[start time 1, end time 1], [start time 2, end time 2]]
-//        this.availableTime = new TreeMap<>();
+        this.availableTime = new TreeMap<>();
 
-//        for (Integer[] lst: availableTime) {
-//            this.availableTime.put(lst[0], lst[1]);
-//        }
+        for (Integer[] lst: availableTime) {
+            this.availableTime.put(lst[0], lst[1]);
+        }
 
-//        this.features = new ArrayList<>(features);
+        this.features = new ArrayList<>(features);
         this.roomName = roomName;
 //        schedule = new TreeMap<> ((Comparator<Calendar[]> & Serializable)
 //                (Calendar[] t1, Calendar[]t2) -> {
@@ -90,32 +91,32 @@ public class Room /*implements Available*/{
      * @return true iff this room is open during this interval
      */
     protected boolean isValidTimeSlots(int startHour1, int endHour2) {
-//        // Case if startHour 1 == endHour2
-//        if (startHour1 == endHour2) {
-//            if (availableTime.get(startHour1) != null) {
-//                return true;
-//            }
-//            Map.Entry<Integer, Integer> timeslot1 = availableTime.lowerEntry(startHour1);
-//            return timeslot1.getValue() >= startHour1;
-//        } else if (startHour1 < endHour2) {
-//            // Case if start hour < end hour
-//            Integer endTime = availableTime.get(startHour1);
-//            if (endTime != null && endTime >= endHour2) {
-//                return true;
-//            } else {
-//                Map.Entry<Integer, Integer> timeslot1 = availableTime.lowerEntry(startHour1);
-//                Map.Entry<Integer, Integer> timeslot2 = availableTime.lowerEntry(endHour2);
-//                if (timeslot1 != null && timeslot2 != null) {
-//                    if (timeslot1.equals(timeslot2)) {
-//                        return true;
-//                    }
-//                    return timeslot1.getValue().equals(timeslot2.getKey());
-//                }
-//            }
-//        } else {
-//            // Case iff end hour < start hour
-//            return isValidTimeSlots(0, startHour1) && isValidTimeSlots(endHour2, 24);
-//        }
+        // Case if startHour 1 == endHour2
+        if (startHour1 == endHour2) {
+            if (availableTime.get(startHour1) != null) {
+                return true;
+            }
+            Map.Entry<Integer, Integer> timeslot1 = availableTime.lowerEntry(startHour1);
+            return timeslot1.getValue() >= startHour1;
+        } else if (startHour1 < endHour2) {
+            // Case if start hour < end hour
+            Integer endTime = availableTime.get(startHour1);
+            if (endTime != null && endTime >= endHour2) {
+                return true;
+            } else {
+                Map.Entry<Integer, Integer> timeslot1 = availableTime.lowerEntry(startHour1);
+                Map.Entry<Integer, Integer> timeslot2 = availableTime.lowerEntry(endHour2);
+                if (timeslot1 != null && timeslot2 != null) {
+                    if (timeslot1.equals(timeslot2)) {
+                        return true;
+                    }
+                    return timeslot1.getValue().equals(timeslot2.getKey());
+                }
+            }
+        } else {
+            // Case iff end hour < start hour
+            return isValidTimeSlots(0, startHour1) && isValidTimeSlots(endHour2, 24);
+        }
         return false;
     }
 
@@ -173,9 +174,9 @@ public class Room /*implements Available*/{
      */
     protected String printAvailableTime() {
         List<String> lst = new ArrayList<>();
-//        for(Integer startTime: availableTime.keySet()) {
-//            lst.add(startTime.toString() + "-" + availableTime.get(startTime).toString());
-//        }
+        for(Integer startTime: availableTime.keySet()) {
+            lst.add(startTime.toString() + "-" + availableTime.get(startTime).toString());
+        }
         return String.join(", ", lst);
     }
 
@@ -204,7 +205,7 @@ public class Room /*implements Available*/{
      */
     protected RoomDataContainer toStringObject(){
         StringBuilder featuresString = new StringBuilder();
-//        for (String feature : features) featuresString.append(feature).append("; ");
+        for (String feature : features) featuresString.append(feature).append("; ");
 
         return new RoomDataContainer(
                 this.roomName,
@@ -215,14 +216,14 @@ public class Room /*implements Available*/{
         );
     }
 
-//    /**
-//     * Checks if the room has the list of additional features
-//     * @param checkedFeatures A list of String representation of the additional features
-//     * @return true iff the room has all the features given by
-//     */
-//    protected boolean hasFeatures(List<String> checkedFeatures){
-//        return features.containsAll(checkedFeatures);
-//    }
+    /**
+     * Checks if the room has the list of additional features
+     * @param checkedFeatures A list of String representation of the additional features
+     * @return true iff the room has all the features given by
+     */
+    protected boolean hasFeatures(List<String> checkedFeatures){
+        return features.containsAll(checkedFeatures);
+    }
 
     public String getRoomName() {
         return roomName;
