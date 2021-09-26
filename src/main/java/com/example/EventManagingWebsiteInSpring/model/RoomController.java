@@ -92,7 +92,8 @@ public class RoomController {
         return rm.searchRoomWithKeyword(
                 roomSearch.getNameKey(),
                 roomSearch.getCapacity(),
-                available
+                available,
+                new ArrayList<>()
         );
     }
 }

@@ -5,6 +5,7 @@ import java.text.DateFormat;
 import java.util.*;
 import javax.persistence.*;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 /**
  * An entity class of Room.
@@ -20,12 +21,15 @@ public class Room implements Serializable /*Available*/{
     private NavigableMap<Integer, Integer> availableTime;
     private String availableTimeJSON;
     private String roomName; //Checked for uniqueness
-//    private final NavigableMap<Calendar[], String> schedule;
-    @ElementCollection
+
+    //    private final NavigableMap<Calendar[], String> schedule;
+    @Transient
     private List<String> features;
+    private String featuresJSON;
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Integer id;
+
 
     /**
      * Constructs a Room object
@@ -43,8 +47,10 @@ public class Room implements Serializable /*Available*/{
         for (Integer[] lst: availableTime) {
             this.availableTime.put(lst[0], lst[1]);
         }
+        availableTimeJSON = new Gson().toJson(this.availableTime);
 
         this.features = new ArrayList<>(features);
+        this.featuresJSON = new Gson().toJson(this.features);
         this.roomName = roomName;
 //        schedule = new TreeMap<> ((Comparator<Calendar[]> & Serializable)
 //                (Calendar[] t1, Calendar[]t2) -> {
@@ -62,8 +68,16 @@ public class Room implements Serializable /*Available*/{
 //        );
     }
 
-    public Room() {
+    public Room() {}
 
+    public String getAvailableTimeJSON() {
+        return availableTimeJSON;
+    }
+
+    public void setAvailableTimeJSON(String availableTimeJSON) {
+        this.availableTimeJSON = availableTimeJSON;
+        this.availableTime = new Gson().fromJson(availableTimeJSON,
+                new TypeToken<NavigableMap<Integer, Integer>>(){}.getType());
     }
 
     /**
@@ -235,5 +249,15 @@ public class Room implements Serializable /*Available*/{
 
     public Integer getId() {
         return id;
+    }
+
+
+    public String getFeaturesJSON() {
+        return featuresJSON;
+    }
+
+    public void setFeaturesJSON(String featuresJSON) {
+        this.featuresJSON = featuresJSON;
+        this.features = Arrays.asList(new Gson().fromJson(featuresJSON, String[].class));
     }
 }

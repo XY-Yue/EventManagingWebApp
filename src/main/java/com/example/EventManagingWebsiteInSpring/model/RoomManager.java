@@ -258,7 +258,7 @@ public class RoomManager {
      * @return a list of room data containers that contains all information of the desired rooms.
      */
     public List<RoomDataContainer> searchRoomWithKeyword(String roomNameKey, int capacity,
-                                                         int[] available/*, List<String> features*/){
+                                                         int[] available, List<String> features){
         List<RoomDataContainer> output = new ArrayList<>();
 
         for (String name : roomList.keySet()){
@@ -271,9 +271,9 @@ public class RoomManager {
                 if (room.getCapacity() < capacity){
                     continue;
                 }
-//                if (!room.hasFeatures(features)){
-//                    continue;
-//                }
+                if (!room.hasFeatures(features)){
+                    continue;
+                }
                 output.add(room.toStringObject());
             }
         }

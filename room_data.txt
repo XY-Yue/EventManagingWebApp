@@ -1,13 +1,6 @@
 ["Projector","Row of chairs","Table","Computers"]
-{"capacity":200,"roomName":"MP203"}
-{"capacity":50,"roomName":"MP137"}
-{"capacity":100,"roomName":"GB221"}
-{"capacity":200,"roomName":"MP102"}
-{"capacity":156,"roomName":"BA1160"}
-{"capacity":200,"roomName":"MP103"}
-{"capacity":200,"roomName":"MP202"}
-{"capacity":1000,"roomName":"CH"}
-{"capacity":30,"roomName":"BA4075"}
-{"capacity":196,"roomName":"BA1130"}
-{"capacity":500,"roomName":"MY150"}
-{"capacity":100,"roomName":"SS1074"}
+{"capacity":200,"availableTime":{"7":12},"availableTimeJSON":"{\"7\":12}","roomName":"KP108","features":[],"featuresJSON":"[]"}
+{"capacity":100,"availableTime":{"1":2,"7":8,"13":14,"19":20},"availableTimeJSON":"{\"1\":2,\"7\":8,\"13\":14,\"19\":20}","roomName":"BA1160","features":[],"featuresJSON":"[]"}
+{"capacity":2000,"availableTime":{"1":3,"9":12},"availableTimeJSON":"{\"1\":3,\"9\":12}","roomName":"MS2158","features":[],"featuresJSON":"[]"}
+{"capacity":200,"availableTime":{"6":12},"availableTimeJSON":"{\"6\":12}","roomName":"BA1130","features":[],"featuresJSON":"[]"}
+{"capacity":100,"availableTime":{"8":12},"availableTimeJSON":"{\"8\":12}","roomName":"MP134","features":[]}
